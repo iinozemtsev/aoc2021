@@ -42,6 +42,9 @@ pub fn fish_count(fish_by_age: &HashMap<u8, u64>) -> u64 {
 
 #[cfg(test)]
 mod tests {
+    use super::*;
+    use super::super::parse::parse_comma_separated;
+
     fn to_map(fish_ages: Vec<u8>) -> HashMap<u8, u64> {
         let mut result = HashMap::new();
         for age in fish_ages {
@@ -50,19 +53,14 @@ mod tests {
         return result;
     }
 
-    fn parse_input(text: &str) -> Vec<u8> {
-        text.split(",").map(|s| s.parse::<u8>().unwrap()).collect()
-    }
-
     fn get_sample_input() -> Vec<u8> {
-        parse_input(include_str!("../resources/day6/sample.txt"))
+        parse_comma_separated(include_str!("../resources/day6/sample.txt"))
     }
 
     fn get_input() -> Vec<u8> {
-        parse_input(include_str!("../resources/day6/input.txt"))
+        parse_comma_separated(include_str!("../resources/day6/input.txt"))
     }
 
-    use super::*;
     #[test]
     fn part1_sample() {
         let mut fish_ages = to_map(get_sample_input());
