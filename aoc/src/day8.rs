@@ -89,10 +89,9 @@ impl FromStr for Picture {
     fn from_str(text: &str) -> Result<Self, String> {
         let mut pixels = 0u8;
         for ch in text.chars() {
-            let bit_index = (ch as u8) - U8A;
-            pixels |= 1 << bit_index;
+            pixels |= 1 << ((ch as u8) - U8A);
         }
-        Ok(Picture { pixels: pixels })
+        Ok(Picture { pixels })
     }
 }
 

@@ -64,7 +64,7 @@ fn points(line: &Line) -> Vec<Point> {
         let y_from = std::cmp::min(line.from.y, line.to.y);
         let y_to = std::cmp::max(line.from.y, line.to.y);
         for y in y_from..=y_to {
-            result.push(Point { x: x, y: y });
+            result.push(Point { x, y });
         }
     } else if line.from.y == line.to.y {
         let y = line.from.y;
@@ -72,7 +72,7 @@ fn points(line: &Line) -> Vec<Point> {
         let x_to = std::cmp::max(line.from.x, line.to.x);
 
         for x in x_from..=x_to {
-            result.push(Point { x: x, y: y });
+            result.push(Point { x, y });
         }
     } else {
     }
@@ -92,7 +92,7 @@ fn points2(line: &Line) -> Vec<Point> {
     let mut x = x_from;
     let mut y = y_from;
     loop {
-        result.push(Point{x:x,y:y});
+        result.push(Point { x, y });
 
         if x == x_to && y == y_to {
             break;

@@ -115,22 +115,22 @@ pub fn part2(field: &Field) -> u64 {
 impl FromStr for Field {
     type Err = String;
     fn from_str(text: &str) -> Result<Field, String> {
-        let mut heights: Vec<u32> = Vec::new();
+        let mut values: Vec<u32> = Vec::new();
         let mut height = 0;
         let mut width = 0;
         for line in text.lines() {
             height += 1;
             width = 0;
             for char in line.chars() {
-                heights.push((char as u8 - ('0' as u8)) as u32);
+                values.push((char as u8 - ('0' as u8)) as u32);
                 width += 1;
             }
         }
 
         Ok(Field {
-            height: height,
-            width: width,
-            values: heights,
+            height,
+            width,
+            values,
         })
     }
 }
