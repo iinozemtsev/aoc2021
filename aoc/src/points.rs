@@ -1,4 +1,5 @@
 use std::ops::Add;
+use std::str::FromStr;
 
 #[derive(PartialEq, Eq, Hash, Debug, Clone, Copy)]
 pub struct Point {
@@ -46,5 +47,18 @@ impl Add<&Offset> for &Point {
             x: self.x + rhs.0,
             y: self.y + rhs.1,
         }
+    }
+}
+
+impl FromStr for Point {
+    type Err = String;
+    fn from_str(text: &str) -> Result<Point, String> {
+        let (x_str, y_str) = text
+            .split_once(",")
+            .ok_or(format!("Cannot split string {} once by comma", text))?;
+        Ok(Point {
+            x: x_str.parse::<i32>().map_err(|e| e.to_string())?,
+            y: y_str.parse::<i32>().map_err(|e| e.to_string())?,
+        })
     }
 }

@@ -3,7 +3,7 @@ use std::collections::HashSet;
 use std::collections::VecDeque;
 
 #[derive(Hash, Eq, PartialEq, Clone, Copy, Debug)]
-struct Cave {
+pub struct Cave {
     name: &'static str,
     is_small: bool,
 }
@@ -71,13 +71,6 @@ impl CavePath {
         }
     }
 
-    fn print(&self) -> String {
-        self.caves
-            .iter()
-            .map(|c| c.name)
-            .collect::<Vec<&str>>()
-            .join(" -> ")
-    }
 }
 
 pub struct CaveSystem {
@@ -85,13 +78,13 @@ pub struct CaveSystem {
 }
 
 impl CaveSystem {
-    fn new() -> Self {
+    pub fn new() -> Self {
         CaveSystem {
             caves: HashMap::new(),
         }
     }
 
-    fn add_path(&mut self, from: Cave, to: Cave) {
+    pub fn add_path(&mut self, from: Cave, to: Cave) {
         self.caves
             .entry(from)
             .and_modify(|v| v.push(to.clone()))
@@ -101,7 +94,7 @@ impl CaveSystem {
             .and_modify(|v| v.push(from.clone()))
             .or_insert(vec![from]);
     }
-    fn parse(text: &'static str) -> Self {
+    pub fn parse(text: &'static str) -> Self {
         let mut result = CaveSystem::new();
         for line in text.lines() {
             let (from, to) = line.split_once('-').unwrap();
@@ -110,15 +103,6 @@ impl CaveSystem {
         result
     }
 
-    fn print(&self) -> String {
-        let mut result = String::new();
-        for (from, tos) in &self.caves {
-            for to in tos {
-                result = format!("{}\n{} -> {}", result, from.name, to.name,);
-            }
-        }
-        result
-    }
 }
 
 fn traverse(cave_system: &CaveSystem, allow_double_small_cave: bool) -> Vec<CavePath> {
