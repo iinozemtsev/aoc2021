@@ -10,6 +10,7 @@ pub mod day12;
 pub mod day13;
 pub mod day14;
 pub mod day15;
+pub mod day16;
 pub mod parse;
 pub mod points;
 pub mod sparse_field;
