@@ -1,4 +1,4 @@
-use std::ops::Add;
+use std::ops::{Add, AddAssign};
 use std::str::FromStr;
 
 #[derive(PartialEq, Eq, Hash, Debug, Clone, Copy)]
@@ -7,8 +7,27 @@ pub struct Point {
     pub y: i32,
 }
 
+impl Point {
+    pub fn new() -> Self {
+        Point { x: 0, y: 0 }
+    }
+}
 #[derive(PartialEq, Eq, Hash, Debug, Clone, Copy)]
-pub struct Offset(i32, i32);
+pub struct Rect {
+    pub top_left: Point,
+    pub bottom_right: Point,
+}
+
+impl Rect {
+    pub fn contains(&self, point: &Point) -> bool {
+        point.x <= self.bottom_right.x
+            && point.x >= self.top_left.x
+            && point.y <= self.top_left.y
+            && point.y >= self.bottom_right.y
+    }
+}
+#[derive(PartialEq, Eq, Hash, Debug, Clone, Copy)]
+pub struct Offset(pub i32, pub i32);
 
 static TOP: Offset = Offset(0, -1);
 static TOP_LEFT: Offset = Offset(-1, -1);
@@ -47,6 +66,13 @@ impl Add<&Offset> for &Point {
             x: self.x + rhs.0,
             y: self.y + rhs.1,
         }
+    }
+}
+
+impl AddAssign<&Offset> for Point {
+    fn add_assign(&mut self, Offset(dx, dy): &Offset) {
+        self.x += dx;
+        self.y += dy;
     }
 }
 

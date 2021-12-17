@@ -11,7 +11,9 @@ pub mod day13;
 pub mod day14;
 pub mod day15;
 pub mod day16;
+pub mod day17;
 pub mod parse;
 pub mod points;
 pub mod sparse_field;
 pub mod vec_field;
+
