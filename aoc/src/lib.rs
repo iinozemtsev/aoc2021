@@ -16,4 +16,5 @@ pub mod parse;
 pub mod points;
 pub mod sparse_field;
 pub mod vec_field;
+pub mod day18;
 
