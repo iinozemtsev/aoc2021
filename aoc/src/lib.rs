@@ -1,5 +1,7 @@
 #[macro_use]
 extern crate lazy_static;
+#[macro_use]
+extern crate nalgebra;
 pub mod day6;
 pub mod day7;
 pub mod day8;
@@ -17,4 +19,5 @@ pub mod points;
 pub mod sparse_field;
 pub mod vec_field;
 pub mod day18;
+pub mod day19;
 
