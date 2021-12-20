@@ -13,6 +13,23 @@ impl SparseBoolField {
             points: HashSet::new(),
         }
     }
+    pub fn from_map(text: &str, true_ch: char) -> SparseBoolField{
+        let mut x: i32;
+        let mut y = 0;
+        let mut result= SparseBoolField::new();
+        for line in text.trim().lines() {
+            x = 0;
+            for ch in line.chars() {
+                if ch == true_ch {
+                    result.set(&Point { x, y });
+                }
+                x += 1;
+            }
+            y += 1;
+        }
+        result
+        
+    }
     pub fn from_coords(text: &str) -> Result<SparseBoolField, String> {
         Ok(text
             .lines()
@@ -25,12 +42,16 @@ impl SparseBoolField {
             }))
     }
 
-    fn get(&self, point: &Point) -> bool {
+    pub fn get(&self, point: &Point) -> bool {
         self.points.contains(point)
     }
 
     pub fn set(&mut self, point: &Point) -> bool {
         self.points.insert(*point)
+    }
+
+    pub fn clear(&mut self, point: &Point) -> bool {
+        self.points.remove(point)
     }
 
     pub fn bounds(&self) -> (Point, Point) {
